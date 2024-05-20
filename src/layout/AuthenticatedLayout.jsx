@@ -14,11 +14,10 @@ function AuthenticatedLayout() {
         const onGetUserInfo = async () => {
             try {
                 const userInfo = await authService.getUserInfo()
-                if (userInfo) {
-                    dispatch(authAction(() => userInfo))
-                } else {
+                if (!userInfo) {
                     navigate('/login')
                 }
+                dispatch(authAction(() => userInfo))
             } catch (err) {
                 navigate('/login')
             }
