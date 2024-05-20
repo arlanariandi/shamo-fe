@@ -1,7 +1,6 @@
 import {Outlet, useNavigate} from "react-router-dom";
 import Sidebar from "../component/Sidebar.jsx";
 import {useContext, useEffect} from "react";
-import authService from "../services/AuthService.js";
 import {useDispatch} from "react-redux";
 import {ServiceContext} from "../context/ServiceContext.jsx";
 import {authAction} from "../slices/authSlice.js";

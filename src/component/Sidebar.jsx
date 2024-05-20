@@ -8,6 +8,7 @@ function Sidebar() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {authService} = useContext(ServiceContext)
+
     const handleLogout = () => {
         if (!confirm('are you sure?')) return
         dispatch(
