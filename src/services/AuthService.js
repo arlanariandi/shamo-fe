@@ -13,6 +13,11 @@ const AuthService = () => {
         }
     }
 
+    const register = async (user) => {
+        const {data} = await axiosInstance.post('/api/register', user);
+        return data;
+    }
+
     const logout = () => {
         sessionStorage.removeItem('token')
     }
@@ -28,6 +33,7 @@ const AuthService = () => {
 
     return {
         login,
+        register,
         logout,
         getUserInfo,
         getTokenFromStorage

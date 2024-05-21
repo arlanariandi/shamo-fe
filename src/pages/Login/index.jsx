@@ -5,35 +5,44 @@ import {ServiceContext} from "../../context/ServiceContext.jsx";
 import {authAction} from "../../slices/authSlice.js";
 import {NavLink, useNavigate} from "react-router-dom";
 import LogoShamo from "../../assets/logo-shamo.png";
+import * as Yup from "yup";
 
 function Login() {
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const {authService} = useContext(ServiceContext)
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const {authService} = useContext(ServiceContext);
+
+    const validationSchema = Yup.object({
+        email: Yup.string().email('Invalid email address').required('Email is required'),
+        password: Yup.string().required('Password is required')
+    })
 
     const {
         values: {email, password},
         handleChange,
-        handleSubmit
+        handleSubmit,
+        errors,
+        touched
     } = useFormik({
         initialValues: {
             email: '',
             password: ''
         },
+        validationSchema,
         onSubmit: async (values) => {
             dispatch(
                 authAction(async () => {
-                    const result = await authService.login(values)
+                    const result = await authService.login(values);
                     if (result.meta.code === 200) {
-                        sessionStorage.setItem('token', result.data.access_token)
-                        navigate('/backoffice')
+                        sessionStorage.setItem('token', result.data.access_token);
+                        navigate('/backoffice');
                     }
-                    const resultInfo = await authService.getUserInfo()
-                    return resultInfo
+                    const resultInfo = await authService.getUserInfo();
+                    return resultInfo;
                 })
-            )
+            );
         }
-    })
+    });
 
     useEffect(() => {
         const onGetUserInfo = async () => {
@@ -69,6 +78,8 @@ function Login() {
                                        onChange={handleChange}
                                        value={email}
                                 />
+                                {errors.email && touched.email &&
+                                    <div className="mt-4 text-sm text-red-800 dark:text-red-400">{errors.email}</div>}
                             </div>
                             <div>
                                 <label htmlFor="password"
@@ -79,6 +90,8 @@ function Login() {
                                        onChange={handleChange}
                                        value={password}
                                 />
+                                {errors.password && touched.password && <div
+                                    className="mt-4 text-sm text-red-800 dark:text-red-400">{errors.password}</div>}
                             </div>
                             <div></div>
                             <button type="submit"
