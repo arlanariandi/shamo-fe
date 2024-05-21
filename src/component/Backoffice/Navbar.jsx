@@ -31,9 +31,11 @@ function Navbar() {
                     <div className="flex items-center">
                         <div className="flex items-center ms-3">
                             <div className="flex">
-                                <p className="text-sm font-bold text-gray-100">Hi, &nbsp;</p>
                                 {user ? (
-                                    <h2 className="text-sm font-semibold text-white">{user.name}</h2>
+                                    <div className="flex items-center">
+                                        <img src={user.profile_photo_url} alt="profile" className="rounded-full w-8 mr-2 items-center"/>
+                                        <h2 className="text-sm font-semibold text-white">{user.name}</h2>
+                                    </div>
                                 ) : (
                                     <h2 className="text-sm font-semibold text-white">USER</h2>
                                 )}
