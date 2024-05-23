@@ -1,9 +1,11 @@
 import AuthService from "./AuthService.js";
+import ProductService from "./ProductService.js";
 
 const ServiceFactory = () => {
     return {
-        authService: AuthService()
+        authService: AuthService(),
+        productService: ProductService(),
     }
 }
 
-export default ServiceFactory
+export default ServiceFactory;

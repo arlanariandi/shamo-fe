@@ -28,13 +28,13 @@ function AuthenticatedLayout() {
 
 
     return (
-        <>
+        <div className="bg-gray-50 min-h-dvh dark:bg-gray-900">
             <Navbar/>
             <Sidebar/>
             <main>
                 <Outlet/>
             </main>
-        </>
+        </div>
     )
 }
 
