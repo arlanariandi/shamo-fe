@@ -7,6 +7,7 @@ import Home from "../pages/Home/index.jsx";
 import Register from "../pages/Register/index.jsx";
 import PageNotFound from "../pages/404/index.jsx";
 import User from "../pages/User/index.jsx";
+import ProductDetail from "../pages/ProductDetail/index.jsx";
 
 const setupRouter = () =>
     createBrowserRouter([
@@ -40,6 +41,10 @@ const setupRouter = () =>
                             element: <User/>
                         }
                     ]
+                },
+                {
+                    path: 'product/:id',
+                    element: <ProductDetail/>
                 }
             ]
         }

@@ -1,15 +1,18 @@
 import './App.css'
-import {Outlet} from "react-router-dom";
+import {Outlet, useLocation} from "react-router-dom";
 
 const App = () => {
+    const location = useLocation()
+    const noClassPaths = ['/login', '/register', '/backoffice'];
 
     return (
-        <div className="min-h-screen flex justify-center bg-gray-100">
-            <div className="bg-white min-w-1/2">
+        <div
+            className={`${noClassPaths.includes(location.pathname) ? '' : 'min-h-screen flex justify-center bg-gray-100'}`}>
+            <div className={`${noClassPaths.includes(location.pathname) ? '' : 'bg-white w-full max-w-md'}`}>
                 <Outlet/>
             </div>
         </div>
-    )
+    );
 }
 
 export default App
